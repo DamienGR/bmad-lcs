@@ -19,12 +19,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite"
+    "url": "https://github.com/DamienGR/bmad-legacy-consolidation-suite"
   },
   "bugs": {
-    "url": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite/issues"
+    "url": "https://github.com/DamienGR/bmad-legacy-consolidation-suite/issues"
   },
-  "homepage": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite#readme",
+  "homepage": "https://github.com/DamienGR/bmad-legacy-consolidation-suite#readme",
   "files": [
     "src/modules/lcs/**/*"
   ]
