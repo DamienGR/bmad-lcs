@@ -1,0 +1,31 @@
+{
+  "name": "bmad-legacy-consolidation-suite",
+  "version": "1.0.0",
+  "description": "Progressive legacy consolidation by specialized AI agents — Analyze, secure, refactor and test legacy web projects (WordPress, Drupal)",
+  "main": "src/modules/lcs/module.yaml",
+  "keywords": [
+    "bmad",
+    "bmad-module",
+    "lcs",
+    "legacy",
+    "consolidation",
+    "wordpress",
+    "drupal",
+    "refactoring",
+    "testing",
+    "ai-agents"
+  ],
+  "author": "Damien",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite"
+  },
+  "bugs": {
+    "url": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite/issues"
+  },
+  "homepage": "https://github.com/bmad-code-org/bmad-legacy-consolidation-suite#readme",
+  "files": [
+    "src/modules/lcs/**/*"
+  ]
+}

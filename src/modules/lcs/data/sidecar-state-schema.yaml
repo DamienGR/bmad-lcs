@@ -1,0 +1,137 @@
+# LCS Sidecar State Schema
+# Central state file for consolidation tracking
+# Location: {project-root}/_bmad-output/lcs/sidecar-state.yaml
+# Read/written by: Conrad (Lead) and all workflows
+
+project:
+  name: ""
+  framework: ""              # wordpress-6.x, wordpress-5.x, drupal-10, drupal-7
+  framework_version: ""
+  repo_path: ""
+  site_url: ""               # Local DDEV URL
+  ddev_project: ""
+
+consolidation:
+  current_phase: "pre-flight" # pre-flight|audit|safety-nets|dependency-update|refactoring|deep-testing|guard
+  started_at: ""
+  last_session: ""
+
+capabilities:                 # Output of Pre-flight
+  git: false
+  ddev: false
+  mysql: false
+  node: false
+  composer: false
+  php_codesniffer: false
+
+tasks:
+  pre-flight:
+    - id: "env-check"
+      status: "pending"       # pending|in_progress|done|failed|skipped
+      result: null
+      artifact: null          # Path to output file (relative to _bmad-output/lcs/)
+    - id: "framework-detection"
+      status: "pending"
+      result: null
+      artifact: null
+    - id: "framework-profile-load"
+      status: "pending"
+      result: null
+      artifact: null
+
+  audit:
+    - id: "code-analysis"
+      status: "pending"
+      result: null
+      artifact: "audit/code-analysis.md"
+    - id: "site-exploration"
+      status: "pending"
+      result: null
+      artifact: "audit/site-exploration.md"
+    - id: "dependency-scan"
+      status: "pending"
+      result: null
+      artifact: "audit/dependency-scan.md"
+    - id: "audit-synthesis"
+      status: "pending"
+      result: null
+      artifact: "audit/audit-report.md"
+    - id: "batched-qa"
+      status: "pending"
+      result: null
+      artifact: "audit/open-questions.md"
+    - id: "risk-map"
+      status: "pending"
+      result: null
+      artifact: "audit/risk-map.md"
+
+  safety-nets:
+    - id: "e2e-tests"
+      status: "pending"
+      result: null
+      artifact: "safety-nets/e2e-report.md"
+    - id: "snapshots"
+      status: "pending"
+      result: null
+      artifact: "safety-nets/snapshots-report.md"
+    - id: "smoke-tests"
+      status: "pending"
+      result: null
+      artifact: "safety-nets/smoke-tests-report.md"
+    - id: "static-guard"
+      status: "pending"
+      result: null
+      artifact: "safety-nets/static-guard-report.md"
+
+  dependency-update:
+    - id: "vulnerability-audit"
+      status: "pending"
+      result: null
+      artifact: "dependency-update/vulnerability-audit.md"
+    - id: "update-execution"
+      status: "pending"
+      result: null
+      artifact: "dependency-update/update-report.md"
+
+  refactoring:
+    - id: "refactoring-plan"
+      status: "pending"
+      result: null
+      artifact: "refactoring/refactoring-plan.md"
+    - id: "refactoring-execution"
+      status: "pending"
+      result: null
+      artifact: "refactoring/refactoring-report.md"
+
+  deep-testing:
+    - id: "integration-tests"
+      status: "pending"
+      result: null
+      artifact: "deep-testing/integration-report.md"
+    - id: "unit-tests"
+      status: "pending"
+      result: null
+      artifact: "deep-testing/unit-report.md"
+    - id: "edge-cases"
+      status: "pending"
+      result: null
+      artifact: "deep-testing/edge-cases-report.md"
+    - id: "coverage-summary"
+      status: "pending"
+      result: null
+      artifact: "deep-testing/coverage-report.md"
+
+  guard:
+    - id: "guard-activation"
+      status: "pending"
+      result: null
+      artifact: null
+
+decisions:
+  # Each entry:
+  # - date: "2026-02-09"
+  #   phase: "safety-nets"
+  #   decision: "E2E on checkout first"
+  #   justification: "Highest business risk + most modified zone"
+  #   data_cited: "cyclomatic complexity: 47, modification frequency: 12/month"
+  #   overridden: false
