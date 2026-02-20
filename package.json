@@ -1,6 +1,6 @@
 {
   "name": "bmad-lcs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Progressive legacy consolidation by specialized AI agents — Analyze, secure, refactor and test legacy web projects (WordPress, Drupal)",
   "main": "src/modules/lcs/module.yaml",
   "keywords": [
