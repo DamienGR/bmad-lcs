@@ -85,14 +85,46 @@ For each tool in the registry:
 - Mark status as `error` instead of `available`
 - Note the specific error for the report
 
-### 4. Map Missing Tools to Phase Impact
+### 4. Site Access Verification (SSL Check)
+
+**Condition:** Playwright MCP is `available` AND smoke test passed AND `{site_url}` is known.
+
+If condition not met: skip this section entirely.
+
+**Sequence:**
+
+1. **Attempt navigation** to `{site_url}` using Playwright MCP
+2. **Evaluate result:**
+
+   **✅ Navigation succeeds:**
+   - Record: `site_access = ok`
+   - Continue to next section
+
+   **⚠️ SSL certificate error detected** (self-signed, expired, CN mismatch — typical for DDEV local environments):
+
+   a. Inform the user:
+      > "⚠️ Playwright MCP cannot accéder à `{site_url}` — certificat SSL rejeté. C'est normal pour les environnements DDEV qui utilisent des certificats auto-signés."
+
+   b. **Auto-fix:** Locate the Playwright MCP server configuration (in `.claude/settings.local.json`, `.claude/settings.json`, or `~/.claude/settings.json`) and add `--ignore-https-errors` to the Playwright MCP server `args` array.
+
+   c. **Notify user:** Display the exact change made and inform them:
+      > "✅ Configuration MCP Playwright mise à jour avec `--ignore-https-errors`. Un redémarrage de la session Claude Code est nécessaire pour appliquer le changement. Relancez la session puis ré-exécutez le pre-flight."
+
+   d. **HALT** the workflow — the MCP server must be restarted for the change to take effect. Do NOT continue to step 04.
+
+   **❌ Other navigation error** (site down, DNS failure, connection refused):
+   - Record: `site_access = error`, note the specific error
+   - Inform user: the site at `{site_url}` is not reachable — verify the local server (DDEV) is running
+   - Do NOT halt — this may be resolved before the Audit phase
+
+### 5. Map Missing Tools to Phase Impact
 
 For each missing or errored tool, reference the registry to identify:
 - Which LCS phase(s) depend on this tool
 - What specific capability is lost
 - Whether the phase can still proceed (degraded) or is blocked
 
-### 5. Present MCP Inventory
+### 6. Present MCP Inventory
 
 Display a summary table:
 
@@ -116,7 +148,7 @@ Report totals:
 - "**X** tools available, **Y** missing, **Z** errors"
 - If critical tools (Chrome DevTools, Playwright) are missing: highlight this prominently
 
-### 6. Proceed to State Initialization
+### 7. Proceed to State Initialization
 
 Display: "**MCP inventory complete — Proceeding to state initialization...**"
 
@@ -137,6 +169,8 @@ Display: "**MCP inventory complete — Proceeding to state initialization...**"
 
 - Every tool in the registry checked
 - Smoke tests executed for critical tools (if available)
+- Site access verified via Playwright when available (SSL check)
+- SSL auto-fix applied if certificate error detected
 - Missing tools mapped to impacted phases
 - Inventory table presented clearly
 - All data stored in memory for step 04
@@ -145,8 +179,10 @@ Display: "**MCP inventory complete — Proceeding to state initialization...**"
 
 - Skipping tools from the registry
 - Not performing smoke tests on critical tools
+- Skipping SSL site access verification when Playwright is available
+- Not applying auto-fix when SSL error is detected
 - Not mapping missing tools to phase impacts
-- Attempting to install or configure tools
-- Writing files before step 04
+- Attempting to install or configure tools (EXCEPTION: SSL auto-fix on MCP config is allowed)
+- Writing files before step 04 (EXCEPTION: MCP settings update for SSL fix is allowed)
 
-**Master Rule:** Check every tool in the registry. Report facts, not opinions. Missing tools are normal — just document the impact.
+**Master Rule:** Check every tool in the registry. Report facts, not opinions. Missing tools are normal — just document the impact. SSL certificate issues on DDEV are expected — auto-fix and inform.

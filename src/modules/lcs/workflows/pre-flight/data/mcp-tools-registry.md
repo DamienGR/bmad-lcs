@@ -34,6 +34,7 @@ These significantly impact the consolidation journey when missing.
 - **Smoke Test:** YES — attempt to list available browsers or get accessibility snapshot
 - **Phase(s):** Safety Nets (E2E tests), Deep Testing
 - **Impact if Missing:** Cannot write E2E tests or visual regression snapshots. Safety Nets phase will be limited to static analysis only. Deep Testing will lack integration test capabilities.
+- **Known Issue — SSL:** DDEV local environments use self-signed certificates that Playwright rejects by default. Pre-flight step 03 will detect this and auto-fix by adding `--ignore-https-errors` to the MCP server args. Requires a session restart after the fix is applied.
 
 ---
 
