@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2026-04-02
+
+- Add CHANGELOG.md documenting full version history and v2.0.0 breaking changes
+
 ## [2.0.0] - 2026-04-02
 
 ### Breaking Changes
