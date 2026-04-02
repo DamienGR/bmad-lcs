@@ -1,0 +1,23 @@
+code: lcs
+name: "Legacy Consolidation Suite"
+header: "Progressive legacy consolidation by specialized AI agents"
+subheader: "Analyze, secure, refactor and test legacy web projects (WordPress, Drupal)"
+description: "Progressive legacy consolidation by specialized AI agents — Analyze, secure, refactor and test legacy web projects (WordPress, Drupal)"
+default_selected: false
+
+# Variables from Core Config inserted automatically by installer:
+## user_name
+## communication_language
+## document_output_language
+## output_folder
+## project_root
+
+# LCS-specific configuration variables
+lcs_output:
+  prompt: "Where should LCS artifacts be stored? (audit reports, safety nets, coverage reports)"
+  default: "{output_folder}/lcs"
+  result: "{project-root}/{value}"
+
+# Directories to create during installation (declarative, no code execution)
+directories:
+  - "{lcs_output}"
